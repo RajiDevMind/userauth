@@ -8,10 +8,17 @@
 a {
   cursor: pointer;
 }
+
+main {
+  padding: 10px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
-  margin: 0 100px;
+  /* margin: 0 100px; */
 }
 .frontbar {
   display: flex;
@@ -20,4 +27,33 @@ a {
 h2 {
   margin: 0;
   padding: 0 10px;
+}
+
+form.login,
+form.register {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input.typein {
+  outline: none;
+  border-bottom: 3px solid #ccc;
+  border: 0;
+  width: 98%;
+  background: #ccc;
+  padding: 4px;
+  margin: 8px 0;
+  font-size: 19px;
+}
+
+button {
+  width: 100%;
+  font-size: 19px;
+  outline: none;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #ccc;
 }

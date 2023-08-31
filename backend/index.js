@@ -3,9 +3,17 @@ const router = require("./router/auth");
 const app = express();
 const connectDB = require("./db/connect");
 require("dotenv").config();
+const cors = require("cors");
 
 // middleware to convert
 app.use(express.json());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello, world by raji o.i");

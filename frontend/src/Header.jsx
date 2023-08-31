@@ -1,7 +1,5 @@
-import React from "react";
-import IndexPage from "./pages/IndexPage";
-import loginPage from "./pages/LoginPage";
 import { Link } from "react-router-dom";
+import MenuIcon from "./svgfile/Menu";
 const Header = () => {
   return (
     <>
@@ -13,8 +11,9 @@ const Header = () => {
           <h2>FRONTLINER</h2>
           <h2>FRONTLINER SEC</h2>
         </div>
-        <Link to={"/login"} className="iconbar">
-          icon bar
+        {/* {'/auth/login' : '/auth'} */}
+        <Link to={"/auth/login"} className="iconbar">
+          <MenuIcon />
         </Link>
       </header>
     </>

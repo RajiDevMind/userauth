@@ -1,15 +1,34 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
-  const HandleFormSubmission = (e) => {
+  const HandleFormSubmission = async (e) => {
     e.preventDefault();
-    console.log("login clicked");
+    try {
+      const resp = await axios.post(
+        "/auth/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
+      if (resp) {
+        setRedirect(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  if (redirect) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <>
       <form onSubmit={HandleFormSubmission} className="login">
@@ -38,7 +57,7 @@ const LoginPage = () => {
         <button type="submit">Login</button>
         <br />
         <span>
-          Don't have an account? <Link to={"/register"}>Register</Link>
+          Don't have an account? <Link to={"/auth/register"}>Register</Link>
         </span>
       </form>
     </>

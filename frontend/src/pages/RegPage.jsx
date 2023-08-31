@@ -1,14 +1,37 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
+
 const RegPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const [isMember, setIsMember] = useState(false);
 
-  const HandleFormSubmission = (e) => {
+  const HandleFormSubmission = async (e) => {
     e.preventDefault();
-    console.log("reg button clicked!!!");
+    try {
+      const resp = await axios.post(
+        "/auth/register",
+        {
+          name,
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
+      if (resp) {
+        setRedirect(true);
+        alert("Successfully Registered!!!");
+      }
+    } catch (err) {
+      alert("Registration failed, Try again?");
+    }
   };
+  if (redirect) {
+    return <Navigate to={"/auth/login"} />;
+  }
   return (
     <>
       <form onSubmit={HandleFormSubmission} className="register">
@@ -48,7 +71,7 @@ const RegPage = () => {
         <button type="submit">Submit</button>
         <br />
         <span>
-          Do you have account? <Link to={"/login"}>Login</Link>
+          Do you have account? <Link to={"/auth/login"}>Login</Link>
         </span>
       </form>
     </>

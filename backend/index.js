@@ -4,9 +4,11 @@ const app = express();
 const connectDB = require("./db/connect");
 require("dotenv").config();
 const cors = require("cors");
-
+const cookieParser = require("cookie-parser");
 // middleware to convert
 app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
     credentials: true,

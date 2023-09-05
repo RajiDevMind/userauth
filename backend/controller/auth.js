@@ -2,7 +2,6 @@ const UserModel = require("../model/auth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const asyncWrapper = require("../asyncWrapper");
-
 const register = asyncWrapper(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -45,7 +44,11 @@ const login = asyncWrapper(async (req, res) => {
   res.json({ userDoc: { resp: userDetails.name }, token });
 });
 
+const logout = asyncWrapper(async (req, res) => {
+  res.cookie("token", "").json(true);
+});
 module.exports = {
   register,
   login,
+  logout,
 };
